@@ -8,6 +8,8 @@ const text = document.querySelector('span.quote-text')
 const author = document.querySelector('span.author')
 const buttonNewQuotes = document.querySelector('button.new-quote')
 const buttonTwitter = document.querySelector('button.twitter-button')
+let loader = document.getElementById('loader')
+let quoteContainer = document.getElementById('quote-container')
 
 function tweetQuote() {
   const tweetThisQuote = `https://twitter.com/intent/tweet?text=${text.textContent} - ${author.textContent}`
@@ -15,6 +17,8 @@ function tweetQuote() {
 }
 
 function newQuotes() {
+  //loading spinner
+  loading()
   //Get randomised quotes
   const quotes = apiQuotes[Math.floor(Math.random() * apiQuotes.length)]
 
@@ -32,14 +36,27 @@ function newQuotes() {
   if (!quotes.author) {
     author.innerText = 'Unknown'
   }
+  complete()
+}
+
+function loading() {
+  loader.hidden = false
+  quoteContainer.hidden = true
+}
+
+function complete() {
+  loader.hidden = true
+  quoteContainer.hidden = false
 }
 
 //Async function get data from Api
 async function getQuotes() {
   const apiUrl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json'
   try {
+    loading()
     const response = await fetch(apiUrl)
     apiQuotes = await response.json()
+    complete()
   } catch {}
 }
 
@@ -48,6 +65,5 @@ buttonTwitter.addEventListener('click', tweetQuote)
 
 getQuotes()
 
-fetch(`https://jacintodesign.github.io/quotes-api/data/quotes.json`)
-  .then((response) => response.json())
-  .then((json) => console.log(json))
+//loading
+// loading()
