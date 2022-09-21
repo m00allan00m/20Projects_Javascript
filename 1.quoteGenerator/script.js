@@ -9,11 +9,6 @@ const author = document.querySelector('span.author')
 const buttonNewQuotes = document.querySelector('button.new-quote')
 const buttonTwitter = document.querySelector('button.twitter-button')
 
-// function tweetQuote() {
-//   const twitterUrl = `https://twitter.com/intent/tweet?text=${text.innerText} - ${author.innerText}`
-//   window.open(twitterUrl, 'blank')
-// }
-
 function tweetQuote() {
   const tweetThisQuote = `https://twitter.com/intent/tweet?text=${text.textContent} - ${author.textContent}`
   window.open(tweetThisQuote, '_blank')
