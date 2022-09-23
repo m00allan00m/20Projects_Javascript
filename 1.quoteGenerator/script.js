@@ -18,7 +18,7 @@ function tweetQuote() {
 
 function newQuotes() {
   //loading spinner
-  loading()
+  showLoadingSpinner()
   //Get randomised quotes
   const quotes = apiQuotes[Math.floor(Math.random() * apiQuotes.length)]
 
@@ -36,15 +36,15 @@ function newQuotes() {
   if (!quotes.author) {
     author.innerText = 'Unknown'
   }
-  complete()
+  removeLoadingSpinner()
 }
 
-function loading() {
+function showLoadingSpinner() {
   loader.hidden = false
   quoteContainer.hidden = true
 }
 
-function complete() {
+function removeLoadingSpinner() {
   loader.hidden = true
   quoteContainer.hidden = false
 }
